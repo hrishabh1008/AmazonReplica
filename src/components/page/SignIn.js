@@ -26,7 +26,7 @@ const SignIn = () => {
         const { email, password } = logdata;
     
         try {
-            const res = await fetch("/signin", {
+            const res = await fetch("https://isells-server.vercel.app/signin", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
