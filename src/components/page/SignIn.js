@@ -21,35 +21,42 @@ const SignIn = () => {
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        e.preventDefault(); // Prevent form default submission behavior
     
         const { email, password } = logdata;
     
         try {
+            // Make API call
             const res = await fetch("https://isells-server.vercel.app/signin", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({ email, password }),
-                credentials: 'include', // Ensure cookies are included
+                credentials: 'include', // Include cookies in the request
             });
     
-            const responseData = await res.json(); // Parse response data
+            // Parse response data
+            const responseData = await res.json();
     
             if (!res.ok) {
-                throw new Error(responseData.error || 'Invalid credentials');
+                // Handle errors from backend
+                throw new Error(responseData.error || "Something went wrong");
             }
     
-            setAccount(responseData);
+            // Handle successful sign-in
+            setAccount(responseData.user); // Save user data to state
             toast.success("Sign in successful", { position: "top-right" });
+    
+            // Redirect user
             window.location.href = "/";
     
         } catch (error) {
-            console.error('Sign in error:', error.message);
+            // Handle fetch or response errors
+            console.error("Sign in error:", error.message);
             toast.error(error.message, { position: "top-right" });
         }
-    };
+    };    
          
     return (
         <section>
