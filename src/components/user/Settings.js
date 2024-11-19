@@ -20,7 +20,7 @@ const Settings = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://isells-server.vercel.app/validuser', {
+        const response = await fetch('/validuser', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
