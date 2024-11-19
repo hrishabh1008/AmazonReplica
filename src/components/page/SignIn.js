@@ -56,7 +56,8 @@ const SignIn = () => {
             console.error("Sign in error:", error.message);
             toast.error(error.message, { position: "top-right" });
         }
-    };    
+    };
+        
          
     return (
         <section>
