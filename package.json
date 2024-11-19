@@ -2,7 +2,6 @@
   "name": "isells.in",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://isells-server.vercel.app/",
   "dependencies": {
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
