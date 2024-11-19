@@ -59,7 +59,32 @@ const SignIn = () => {
             console.error("Sign in error:", error.message);
             toast.error(error.message, { position: "top-right" });
         }
-    };    
+    };
+    
+    // Function to check authentication status on page load
+    const checkAuth = async () => {
+        try {
+            const res = await fetch("https://isells-server.vercel.app/validuser", {
+                method: "GET",
+                credentials: 'include', // Include cookies in the request
+            });
+    
+            if (res.status === 200) {
+                const responseData = await res.json();
+                setAccount(responseData); // Set authenticated user data
+            } else {
+                throw new Error('Authentication check failed');
+            }
+        } catch (error) {
+            console.error("Auth check error:", error.message);
+        }
+    };
+    
+    // Call checkAuth on component mount or page load
+    useEffect(() => {
+        checkAuth();
+    }, []);
+        
        
     return (
         <section>
