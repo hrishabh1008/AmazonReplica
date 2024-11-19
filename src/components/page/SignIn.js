@@ -48,8 +48,10 @@ const SignIn = () => {
             setAccount(responseData.user); // Save user data to state
             toast.success("Sign in successful", { position: "top-right" });
     
-            // Redirect user
-            window.location.href = "/";
+            // Redirect user after a small delay to ensure the state is set
+            setTimeout(() => {
+                window.location.href = "/";
+            }, 500);
     
         } catch (error) {
             // Handle fetch or response errors
@@ -57,6 +59,7 @@ const SignIn = () => {
             toast.error(error.message, { position: "top-right" });
         }
     };
+    
         
          
     return (
