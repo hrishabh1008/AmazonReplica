@@ -21,45 +21,70 @@ const SignIn = () => {
         });
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault(); // Prevent form default submission behavior
-    
-        const { email, password } = logdata;
-    
-        try {
-            // Make API call
-            const res = await fetch("https://isells-server.vercel.app/signin", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ email, password }),
-                credentials: 'include', // Include cookies in the request
-            });
-    
-            // Parse response data
-            const responseData = await res.json();
-    
-            if (!res.ok) {
-                // Handle errors from backend
-                throw new Error(responseData.error || "Something went wrong");
-            }
-    
-            // Handle successful sign-in
-            setAccount(responseData.user); // Save user data to state
-            toast.success("Sign in successful", { position: "top-right" });
-    
-            // Redirect user after a small delay to ensure the state is set
-            setTimeout(() => {
-                window.location.href = "/";
-            }, 500);
-    
-        } catch (error) {
-            // Handle fetch or response errors
-            console.error("Sign in error:", error.message);
-            toast.error(error.message, { position: "top-right" });
+const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevent form default submission behavior
+
+    const { email, password } = logdata;
+
+    try {
+        // Make API call
+        const res = await fetch("https://isells-server.vercel.app/signin", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email, password }),
+            credentials: 'include', // Include cookies in the request
+        });
+
+        // Parse response data
+        const responseData = await res.json();
+
+        if (!res.ok) {
+            // Handle errors from backend
+            throw new Error(responseData.error || "Something went wrong");
         }
-    };        
+
+        // Handle successful sign-in
+        setAccount(responseData.user); // Save user data to state
+        toast.success("Sign in successful", { position: "top-right" });
+
+        // Redirect user after a small delay to ensure the state is set
+        setTimeout(() => {
+            window.location.href = "/";
+        }, 500);
+
+    } catch (error) {
+        // Handle fetch or response errors
+        console.error("Sign in error:", error.message);
+        toast.error(error.message, { position: "top-right" });
+    }
+};
+
+// Function to check authentication status on page load
+const checkAuth = async () => {
+    try {
+        const res = await fetch("https://isells-server.vercel.app/validuser", {
+            method: "GET",
+            credentials: 'include', // Include cookies in the request
+        });
+
+        if (res.status === 200) {
+            const responseData = await res.json();
+            setAccount(responseData); // Set authenticated user data
+        } else {
+            throw new Error('Authentication check failed');
+        }
+    } catch (error) {
+        console.error("Auth check error:", error.message);
+    }
+};
+
+// Call checkAuth on component mount or page load
+useEffect(() => {
+    checkAuth();
+}, []);
+        
        
     return (
         <section>
