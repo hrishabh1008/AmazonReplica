@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { LoginContext } from '../context/ContextProvider';
+import axios from 'axios';
 
 const SignIn = () => {
     const [logdata, setLogdata] = useState({
@@ -21,42 +22,28 @@ const SignIn = () => {
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault(); // Prevent form default submission behavior
-    
-        const { email, password } = logdata;
+        e.preventDefault(); // Prevent form submission
+        
+        const { email, password } = logdata; // Get email and password from state
     
         try {
-            // Make API call
-            const res = await fetch("https://isells-server.vercel.app/signin", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ email, password }),
-                credentials: 'include', // Include cookies in the request
-            });
-    
-            // Parse response data
-            const responseData = await res.json();
-    
-            if (!res.ok) {
-                // Handle errors from backend
-                throw new Error(responseData.error || "Something went wrong");
-            }
-    
-            // Handle successful sign-in
-            setAccount(responseData.user); // Save user data to state
+            // Make API call using Axios
+            const res = await axios.post("https://isells-server.vercel.app/signin", 
+                { email, password },
+                { withCredentials: true } // Include credentials (cookies) in the request
+            );
+            
+            // Handle successful response
+            setAccount(res.data.user); // Save user data to state
             toast.success("Sign in successful", { position: "top-right" });
-    
-            // Redirect user after a small delay to ensure the state is set
-            setTimeout(() => {
-                window.location.href = "/";
-            }, 500);
+            
+            // Redirect user
+            window.location.href = "/";
     
         } catch (error) {
-            // Handle fetch or response errors
-            console.error("Sign in error:", error.message);
-            toast.error(error.message, { position: "top-right" });
+            // Handle error
+            console.error("Sign in error:", error.response?.data?.error || error.message);
+            toast.error(error.response?.data?.error || error.message, { position: "top-right" });
         }
     };
     
