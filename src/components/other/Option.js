@@ -8,7 +8,7 @@ const Option = ({ deletedata, get }) => {
 
   const removedata = async (id) => {
     try {
-      const res = await fetch(`/remove/${id}`, {
+      const res = await fetch(`https://isells-server.vercel.app/remove/${id}`, {
         method: 'DELETE',
         headers: {
           Accept: 'application/json',

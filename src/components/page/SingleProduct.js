@@ -25,7 +25,7 @@ const SingleProduct = () => {
     useEffect(() => {
         const fetchProduct = async () => {
             try {
-                const res = await fetch(`/singleproduct/${_id}`, {
+                const res = await fetch(`https://isells-server.vercel.app/singleproduct/${_id}`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json"
@@ -52,7 +52,7 @@ const SingleProduct = () => {
 
     const addtocart = async (productId) => {
         try {
-            const res = await fetch(`/addcart/${productId}`, {
+            const res = await fetch(`https://isells-server.vercel.app/addcart/${productId}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -85,7 +85,7 @@ const SingleProduct = () => {
 
     const handleReviewSubmit = async () => {
         try {
-            const res = await fetch(`/addreview/${_id}`, {
+            const res = await fetch(`https://isells-server.vercel.app/addreview/${_id}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

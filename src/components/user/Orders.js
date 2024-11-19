@@ -12,12 +12,12 @@ const Orders = () => {
       setIsLoading(true);
       try {
         // Fetch orders
-        const ordersResponse = await axios.get('http://localhost:3000/orders');
+        const ordersResponse = await axios.get('https://isells-user.vercel.app/orders');
         setOrders(ordersResponse.data);
 
         // Fetch order details
         const details = await Promise.all(ordersResponse.data.map(async (order) => {
-          const productResponse = await axios.get(`http://localhost:3000/products/${order.productId}`);
+          const productResponse = await axios.get(`https://isells-user.vercel.app/products/${order.productId}`);
           return {
             orderId: order._id,
             productName: productResponse.data.title,
@@ -41,7 +41,7 @@ const Orders = () => {
 
   const cancelOrder = async (id) => {
     try {
-      await axios.put(`http://localhost:3000/cancelOrder/${id}`);
+      await axios.put(`https://isells-user.vercel.app/cancelOrder/${id}`);
       // Update order status in both orders and orderDetails
       setOrders(orders.map(order => (order._id === id ? { ...order, status: 'Cancelled' } : order)));
       setOrderDetails(orderDetails.map(detail => (detail.orderId === id ? { ...detail, status: 'Cancelled' } : detail)));

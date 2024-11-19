@@ -27,7 +27,7 @@ const Shop = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('/products');
+                const response = await fetch('https://isells-server.vercel.app/products');
                 if (!response.ok) {
                     throw new Error('Failed to fetch data');
                 }

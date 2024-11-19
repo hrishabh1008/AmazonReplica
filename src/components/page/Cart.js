@@ -12,7 +12,7 @@ const Cart = () => {
   // Fetch cart data from server
   const fetchData = async () => {
     try {
-      const res = await fetch('/cartdetails', {
+      const res = await fetch('https://isells-server.vercel.app/cartdetails', {
         method: 'GET',
         headers: {
           Accept: 'application/json',
@@ -56,7 +56,7 @@ const Cart = () => {
   // Initiate payment via Paytm
   const initiatePayment = async () => {
     try {
-      const response = await fetch('/paytm-initiate', {
+      const response = await fetch('https://isells-server.vercel.app/paytm-initiate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

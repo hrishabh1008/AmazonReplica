@@ -1,6 +1,6 @@
 export const getProducts =()=>async(dispatch)=>{
     try {
-        const data = await fetch("/products",{
+        const data = await fetch("https://isells-server.vercel.app/products",{
             method:"GET",
             headers:{
                 "Content-Type":"application/json"

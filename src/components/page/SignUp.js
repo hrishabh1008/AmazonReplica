@@ -27,7 +27,7 @@ const SignUp = () => {
     const { name, email, mobile, password, cpassword } = udata;
 
     try {
-      const res = await fetch("signup", {
+      const res = await fetch("https://isells-server.vercel.app/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

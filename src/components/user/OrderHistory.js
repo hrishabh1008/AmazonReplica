@@ -7,7 +7,7 @@ const OrderHistory = () => {
     useEffect(() => {
         const fetchOrders = async () => {
             try {
-                const res = await fetch('/orders', { credentials: 'include' });
+                const res = await fetch('https://isells-server.vercel.app/orders', { credentials: 'include' });
                 const data = await res.json();
                 setOrders(data);
             } catch (error) {

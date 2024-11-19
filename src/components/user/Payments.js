@@ -54,7 +54,7 @@ const Payments = () => {
 
   const fetchCardDetails = async () => {
     try {
-      const response = await fetch('/validuser', {
+      const response = await fetch('https://isells-server.vercel.app/validuser', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -83,7 +83,7 @@ const Payments = () => {
   
     try {
       const hashedCardNumber = 'X'.repeat(12) + cardInfo.cardNumber.slice(-4);
-      const response = await fetch('/saveCard', {
+      const response = await fetch('https://isells-server.vercel.app/saveCard', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -120,7 +120,7 @@ const Payments = () => {
 
   const handleRemoveCardClick = async () => {
     try {
-      const response = await fetch('/removeCard', {
+      const response = await fetch('https://isells-server.vercel.app/removeCard', {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

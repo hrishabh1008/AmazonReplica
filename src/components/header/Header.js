@@ -32,7 +32,7 @@ const Header = () => {
 
     const getDetailValidUser = async () => {
         try {
-            const res = await fetch("/validuser", {
+            const res = await fetch("https://isells-server.vercel.app/validuser", {
                 method: "GET",
                 headers: {
                     Accept: "application/json",
@@ -62,7 +62,7 @@ const Header = () => {
 
     const logoutUser = async () => {
         try {
-            const res2 = await fetch("/logout", {  // Endpoint now correctly matches the backend route
+            const res2 = await fetch("https://isells-server.vercel.app//logout", {  // Endpoint now correctly matches the backend route
                 method: "GET",
                 headers: {
                     Accept: "application/json",

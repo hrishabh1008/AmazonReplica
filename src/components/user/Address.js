@@ -19,7 +19,7 @@ const Address = () => {
   useEffect(() => {
     const fetchAddress = async () => {
       try {
-        const response = await fetch('/validuser', {
+        const response = await fetch('https://isells-server.vercel.app/validuser', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -61,7 +61,7 @@ const Address = () => {
     setSuccessMessage('');
 
     try {
-      const response = await fetch('/updateAddress', {
+      const response = await fetch('https://isells-server.vercel.app/updateAddress', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
