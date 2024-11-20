@@ -33,7 +33,7 @@ const SignIn = () => {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({ email, password }),
-                credentials: 'include',  // Include credentials (cookies) with the request
+                credentials: 'include', // Ensure cookies are included
             });
     
             const responseData = await res.json(); // Parse response data
@@ -44,13 +44,13 @@ const SignIn = () => {
     
             setAccount(responseData);
             toast.success("Sign in successful", { position: "top-right" });
-            window.location.href = "/";  // Redirect after successful login
+            window.location.href = "/";
     
         } catch (error) {
             console.error('Sign in error:', error.message);
             toast.error(error.message, { position: "top-right" });
         }
-    };            
+    };    
        
     return (
         <section>
