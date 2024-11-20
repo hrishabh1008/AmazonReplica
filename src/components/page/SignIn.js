@@ -34,7 +34,7 @@ const SignIn = () => {
                     "Authorization": `Bearer ${process.env.REACT_APP_API_KEY}`,  // Optional: Include API key if needed
                 },
                 body: JSON.stringify({ email, password }),
-                credentials: 'include',  // Ensure cookies are included in the request
+                //credentials: 'include',  // Ensure cookies are included in the request
             });
     
             const responseData = await res.json(); // Parse response data
