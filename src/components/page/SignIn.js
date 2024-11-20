@@ -36,21 +36,23 @@ const SignIn = () => {
                 credentials: 'include', // Ensure cookies are included
             });
     
-            const responseData = await res.json(); // Parse response data
-    
             if (!res.ok) {
+                // If the response is not OK, handle the error
+                const responseData = await res.json(); // Parse response data
                 throw new Error(responseData.error || 'Invalid credentials');
             }
     
+            // Parse the successful response data
+            const responseData = await res.json();
             setAccount(responseData);
             toast.success("Sign in successful", { position: "top-right" });
-            window.location.href = "/";
+            window.location.href = "/"; // Redirect to home page or any other page
     
         } catch (error) {
             console.error('Sign in error:', error.message);
             toast.error(error.message, { position: "top-right" });
         }
-    };            
+    };                
        
     return (
         <section>
