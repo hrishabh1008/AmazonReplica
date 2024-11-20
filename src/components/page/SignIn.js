@@ -31,10 +31,9 @@ const SignIn = () => {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": `Bearer ${process.env.REACT_APP_API_KEY}`,  // Optional: Include API key if needed
                 },
                 body: JSON.stringify({ email, password }),
-                //credentials: 'include',  // Ensure cookies are included in the request
+                credentials: 'include',  // Include credentials (cookies) with the request
             });
     
             const responseData = await res.json(); // Parse response data
@@ -51,7 +50,7 @@ const SignIn = () => {
             console.error('Sign in error:', error.message);
             toast.error(error.message, { position: "top-right" });
         }
-    };        
+    };            
        
     return (
         <section>
