@@ -22,34 +22,36 @@ const SignIn = () => {
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault(); // Prevent default form submission behavior
+        e.preventDefault();
     
-        const { email, password } = logdata; // Assuming logdata contains form inputs
+        const { email, password } = logdata;
     
         try {
-            // Make API call with Axios
-            const res = await axios.post(
-                'https://isells-server.vercel.app/signin', 
-                { email, password }, // Payload
-                { withCredentials: true } // Include cookies in the request
-            );
+            const res = await fetch("https://isells-server.vercel.app/signin", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${process.env.REACT_APP_API_KEY}`,  // Optional: Include API key if needed
+                },
+                body: JSON.stringify({ email, password }),
+                credentials: 'include',  // Ensure cookies are included in the request
+            });
     
-            // Handle successful response
-            const { user } = res.data; // Assuming the response includes a 'user' object
-            setAccount(user); // Save user data to state
-            toast.success('Sign in successful', { position: 'top-right' });
+            const responseData = await res.json(); // Parse response data
     
-            // Redirect user after a small delay to ensure state is updated
-            setTimeout(() => {
-                window.location.href = '/';
-            }, 500);
+            if (!res.ok) {
+                throw new Error(responseData.error || 'Invalid credentials');
+            }
+    
+            setAccount(responseData);
+            toast.success("Sign in successful", { position: "top-right" });
+            window.location.href = "/";  // Redirect after successful login
     
         } catch (error) {
-            // Handle errors
-            console.error('Sign in error:', error.response?.data?.error || error.message);
-            toast.error(error.response?.data?.error || 'Something went wrong', { position: 'top-right' });
+            console.error('Sign in error:', error.message);
+            toast.error(error.message, { position: "top-right" });
         }
-    };    
+    };        
        
     return (
         <section>
