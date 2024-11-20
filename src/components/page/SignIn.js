@@ -27,14 +27,14 @@ const SignIn = () => {
         const { email, password } = logdata;
     
         try {
-            const res = await fetch("https://isells-server.vercel.app/signin", {
-                method: "POST",
+            const res = await fetch('https://isells-server.vercel.app/signin', {
+                method: 'POST',
+                credentials: 'include', // Include cookies
                 headers: {
-                    "Content-Type": "application/json",
+                    'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ email, password }),
-                credentials: 'include',  // Include credentials (cookies) with the request
-            });
+                body: JSON.stringify(data),
+            });            
     
             const responseData = await res.json(); // Parse response data
     
