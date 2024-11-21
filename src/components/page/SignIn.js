@@ -23,9 +23,9 @@ const SignIn = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
+        
         const { email, password } = logdata;
-    
+        
         try {
             const res = await fetch("https://isells-server.vercel.app/signin", {
                 method: "POST",
@@ -33,26 +33,25 @@ const SignIn = () => {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({ email, password }),
-                credentials: 'include', // Ensure cookies are included
+                credentials: 'include', // Important: Sends the cookie with the request
             });
     
             if (!res.ok) {
-                // If the response is not OK, handle the error
-                const responseData = await res.json(); // Parse response data
+                const responseData = await res.json();
                 throw new Error(responseData.error || 'Invalid credentials');
             }
     
-            // Parse the successful response data
+            // Handle successful login
             const responseData = await res.json();
             setAccount(responseData);
             toast.success("Sign in successful", { position: "top-right" });
-            window.location.href = "/"; // Redirect to home page or any other page
+            window.location.href = "/"; // Redirect after successful login
     
         } catch (error) {
             console.error('Sign in error:', error.message);
             toast.error(error.message, { position: "top-right" });
         }
-    };                
+    };                    
        
     return (
         <section>
