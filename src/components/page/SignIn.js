@@ -33,7 +33,7 @@ const SignIn = () => {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({ email, password }),
-                credentials: 'include', // Important: Sends the cookie with the request
+                credentials: 'include',  // Include credentials (cookies)
             });
     
             if (!res.ok) {
@@ -51,7 +51,7 @@ const SignIn = () => {
             console.error('Sign in error:', error.message);
             toast.error(error.message, { position: "top-right" });
         }
-    };                    
+    };                        
        
     return (
         <section>
